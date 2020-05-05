@@ -7,7 +7,7 @@ This image runs hello-world web service in 80 port used for demoing and/or testi
 
 ## Building from Source
 
-The binaries will be located in `/bin` for linux and `build/bin` for cross compiling.
+The binaries will be located in `/bin` for linux and `build/bin` for cross compiling
 
 ### Linux Binary
 
