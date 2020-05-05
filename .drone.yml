@@ -1,34 +1,20 @@
----
-pipeline:
-  build:
-    privileged: true
-    image: rancher/dapper:1.11.2
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    commands:
-    - dapper ci
-
-  stage-files:
-    image: rancher/dapper:1.11.2
-    commands:
-    - cp -r ./bin/* ./package/
-    - cp -rp ./img ./package/
-    when:
-      branch: master
-      event: tag
-
-  publish-image:
+kind: pipeline
+name: default
+steps:
+  # - name: test
+  #   image: golang:1.10-alpine
+  #   commands:
+  #   - "go test"
+  # - name: build
+  #   image: golang:1.10-alpine
+  #   commands:
+  #     - "go build -o ./myapp"
+  - name: publish
     image: plugins/docker
-    dockerfile: package/Dockerfile
-    repo: rancherfederal/hello-world
-    context: package/
-    tag: 
-    - ${DRONE_TAG}
-    - latest
-    secrets: [docker_username, docker_password]
-    build_args:
-    - VERSION=${DRONE_TAG}
-    when:
-      branch: master
-      event: tag
-
+    settings:
+      repo: rancherfederal/hello-world
+      tags: [ "${DRONE_COMMIT_SHA:0:7}","latest" ]
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
