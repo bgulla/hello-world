@@ -1,3 +1,5 @@
+[![Build Status](https://drone.gulla.xyz/api/badges/bgulla/hello-world/status.svg)](https://drone.gulla.xyz/bgulla/hello-world)
+
 Hello world
 ===========
 
