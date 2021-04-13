@@ -2,11 +2,11 @@
 ## ARM64 Docker Build
 kind: pipeline
 type: docker
-name: arm-build
+name: arm64-build
 
 platform:
   os: linux
-  arch: arm
+  arch: arm64
 
 steps:
 
@@ -19,7 +19,7 @@ steps:
       from_secret: docker_password
     repo: bgulla/hello-world
     auto_tag: true
-    auto_tag_suffix: drone-build-arm
+    auto_tag_suffix: drone-build-arm64
 
 ---
 ## AMD64 Docker Build
@@ -64,7 +64,7 @@ steps:
       - linux/arm
 depends_on:
 - amd64-build
-- arm-build
+- arm64-build
 
 
 # kind: pipeline
